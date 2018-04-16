@@ -52,6 +52,7 @@ python train_models.py -h
 ```
 
 ####Example
+
 python train_models.py -input train_example_data.fasta -output-prefix example_models -residue-types S,T
 
 #### Custom prediction from custom general models and custom kinase-specific models:
@@ -60,11 +61,12 @@ python predict.py -input [custom predicting data in fasta format] -model-prefix 
 ```
 
 ####Example
+
 python predict.py -input test_example_data.fasta -model-prefix example_models -output test_example_result
 
 ### Citation：
 Please cite the following paper for using MusiteDeep:
-Duolin Wang, Yanchun Liang, Dong Xu*, Capsule Network for Protein Post-translational Modification Site Prediction, Bioinformatics 2018.
+Duolin Wang, Yanchun Liang, Dong Xu*, Capsule Network for Protein Post-translational Modification Site Prediction.
 
 License
 ----
