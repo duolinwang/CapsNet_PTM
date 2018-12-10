@@ -1,6 +1,10 @@
 # CapsNet_PTM
 
 CapsNet for Protein Post-translational Modification site prediction. It is implemented by deep learning library Keras2.1.1 and Tensorflow backend
+# Training and testing data
+The 10-fold cross-validation training and tesing data for each PTM used in the paper are in folder all_PTM_raw_data.
+Each subfolder contains 10-fold annotated training sequences (metazoa_sequence_annotated_training_X.fasta) and corresponding annotated testing sequences (metazoa_sequences_cross_testing_annotated_X.fasta) and testing sequences without annotation (metazoa_sequences_cross_testing_X.fasta)
+
 # Installation
 
   - Download codes by 
