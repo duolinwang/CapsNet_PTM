@@ -53,7 +53,7 @@ def main():
       
       testX,testY = convertRawToXY(testfrag.as_matrix(),codingMode=codemode) 
       if len(testX.shape)>3:
-          testX.shape = [testX.shape[0],testX.shape[2],testX.shape[3]]
+          testX.shape = (testX.shape[0],testX.shape[2],testX.shape[3])
       
       predictproba=np.zeros((testX.shape[0],2))
       models=Capsnet_main(testX,testY,nb_epoch=1,compiletimes=0,lr=0.001,batch_size=500,lam_recon=0,routings=3,modeltype=modeltype,nb_classes=nb_classes,predict=True)# only to get config
