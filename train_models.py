@@ -22,7 +22,7 @@ def main():
     parser.add_argument('-nb_epoch',  dest='nb_epoch', type=int, help='number of epoches for one bootstrap step. It is invalidate, if earlystop is set.', required=False, default=None)
     parser.add_argument('-earlystop',  dest='earlystop', type=int, help='after the \'earlystop\' number of epochs with no improvement the training will be stopped for one bootstrap step. [Default: 20]', required=False, default=20)
     parser.add_argument('-inputweights',  dest='inputweights', type=int, help='Initial weights saved in a HDF5 file.', required=False, default=None)
-    parser.add_argument('-backupweights',  dest='backupweights', type=int, help='Set the intermediate weights for backup in a HDF5 file.', required=False, default=None)
+    parser.add_argument('-backupweights',  dest='backupweights', type=str, help='Set the intermediate weights for backup in a HDF5 file.', required=False, default=None)
     #parser.add_argument('-transferlayer',  dest='transferlayer', type=int, help='Set the last \'transferlayer\' number of layers to be randomly initialized.', required=False, default=1)
     
     
