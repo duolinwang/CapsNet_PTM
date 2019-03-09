@@ -13,7 +13,7 @@ def main():
     parser.add_argument('-input',  dest='inputfile', type=str, help='Protein sequences to be predicted in fasta format.', required=True)
     parser.add_argument('-output',  dest='outputfile', type=str, help='prefix of the prediction results.', required=True)
     parser.add_argument('-model-prefix',  dest='modelprefix', type=str, help='prefix of custom model used for prediciton. If donnot have one, please run train_general.py to train a custom general PTM model or run train_kinase.py to train a custom kinase-specific PTM model.', required=False,default=None)
-    parser.add_argument('-residue-types',  dest='residues', type=str, help='Residue types that to be predicted, only used when -predict-type is \'general\'. For multiple residues, seperate each with \',\'',required=False,default="S,T,Y")
+    parser.add_argument('-residue-types',  dest='residues', type=str, help='Residue types that to be predicted. For multiple residues, seperate each with \',\'',required=False,default="S,T,Y")
     
     args = parser.parse_args()
     
