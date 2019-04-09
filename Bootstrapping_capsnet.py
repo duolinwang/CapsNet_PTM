@@ -27,18 +27,18 @@ def bootStrapping_allneg_continue_keras2(trainfile,valfile=None,srate=0.8,nb_epo
   else:     #selct 0.1 samples of training data as val
             a=int(train_pos.shape[0]*0.9);
             b=train_neg.shape[0]-int(train_pos.shape[0]*0.1);
-            print "train pos="+str(train_pos.shape[0])+str('\n');
-            print "train neg="+str(train_neg.shape[0])+str('\n');
-            print " a="+str(a)+" b="+str(b)+str('\n');
+            print("train pos="+str(train_pos.shape[0])+str('\n'))
+            print("train neg="+str(train_neg.shape[0])+str('\n'))
+            print(" a="+str(a)+" b="+str(b)+str('\n');
             train_pos_s=train_pos[0:a]
             train_neg_s=train_neg[0:b];
-            print "train pos s="+str(train_pos_s.shape[0])+str('\n');
-            print "train neg s="+str(train_neg_s.shape[0])+str('\n');
+            print("train pos s="+str(train_pos_s.shape[0])+str('\n'))
+            print("train neg s="+str(train_neg_s.shape[0])+str('\n'))
             
             val_pos=train_pos[(a+1):];
-            print "val_pos="+str(val_pos.shape[0])+str('\n');
+            print("val_pos="+str(val_pos.shape[0])+str('\n'))
             val_neg=train_neg[b+1:];
-            print "val_neg="+str(val_neg.shape[0])+str('\n');
+            print("val_neg="+str(val_neg.shape[0])+str('\n'))
             
             val_all=pd.concat([val_pos,val_neg])
             valX1,valY1 = convertRawToXY(val_all.as_matrix(),codingMode=codingMode)
@@ -61,7 +61,7 @@ def bootStrapping_allneg_continue_keras2(trainfile,valfile=None,srate=0.8,nb_epo
         else:
             models,eval_model,manipulate_model,weight_c_model,fitHistory=Capsnet_main(trainX=trainX1,trainY=trainY1,valX=valX1,valY=valY1,nb_classes=nb_classes,nb_epoch=nb_epoch2,earlystop=earlystop,weights=inputweights,compiletimes=t,compilemodels=(models,eval_model,manipulate_model,weight_c_model),lr=0.001,batch_size=500,lam_recon=lam_recon,routings=3,class_weight=None,modeltype=model)
         
-        print "modelweights assigned for "+str(I)+" and "+str(t)+"\n";
+        print("modelweights assigned for "+str(I)+" and "+str(t)+"\n")
         if(outputweights is not None):
             models.save_weights(outputweights,overwrite=True)
   
