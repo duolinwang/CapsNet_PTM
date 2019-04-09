@@ -43,15 +43,6 @@ def main():
     transferlayer=args.transferlayer
     residues=args.residues.split(",")
     
-    #residues=("K")
-    #inputfile = r'../CapsNet_PTM/all_PTM_raw_data' \
-    #            r'/SUMOylation/metazoa_sequence_annotated_training_0.fasta'
-    #if ! os.path.exists("ensemble_results"):
-    #     os.mkdir("ensemble_results")  
-    
-    #outputprefix = 'ensemble_results/model'
-    
-    
     outputmodel = outputprefix+str("_HDF5model")
     outputparameter = outputprefix+str("_parameters")
     
