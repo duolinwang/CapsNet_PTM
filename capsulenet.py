@@ -186,7 +186,7 @@ def Capsnet_main(trainX,trainY,valX=None,valY=None,nb_classes=2,nb_epoch=500,ear
         weight_c_model=compilemodels[3]
     if(predict is False):
         if(weights is not None and compiletimes==0):
-             print "load weights:"+weights;
+             print("load weights:"+weights)
              model.load_weights(weights)
         
         if valX is not None:
