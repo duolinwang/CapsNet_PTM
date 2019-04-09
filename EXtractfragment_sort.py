@@ -8,7 +8,7 @@ def read_fasta(fasta_file):
     try:
         fp = open(fasta_file)
     except IOError:
-        print 'cannot open '+fasta_file + ', check if it exist!'
+        print('cannot open '+fasta_file + ', check if it exist!')
         exit()
     else:
         fp = open(fasta_file)
