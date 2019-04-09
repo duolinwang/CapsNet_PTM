@@ -23,9 +23,9 @@ def main():
     modelprefix=args.modelprefix;
     
     if modelprefix is None:
-       print "Please specify the prefix for an existing custom model by -model-prefix!\n\
+       print（"Please specify the prefix for an existing custom model by -model-prefix!\n\
        It indicates two files [-model-prefix]_HDF5model and [-model-prefix]_parameters.\n \
-       If you don't have such files, please run train_models.py to get the custom model first!\n"
+       If you don't have such files, please run train_models.py to get the custom model first!\n"）
        exit()
     else: #custom prediction
       model=modelprefix+str("_HDF5model")
@@ -33,7 +33,7 @@ def main():
       try:
           f=open(parameter,'r')
       except IOError:
-          print 'cannot open '+ parameter+" ! check if the model exists. please run train_general.py or train_kinase.py to get the custom model first!\n"
+          print（'cannot open '+ parameter+" ! check if the model exists. please run train_general.py or train_kinase.py to get the custom model first!\n"）
       else:
            f= open(parameter, 'r')
            parameters=f.read()
@@ -68,7 +68,7 @@ def main():
       results=np.column_stack((ids,poses,focuses,predictproba[:,1]))
       result=pd.DataFrame(results)
       result.to_csv(outputfile+".txt", index=False, header=None, sep='\t',quoting=csv.QUOTE_NONNUMERIC)
-      print "Successfully predicted from custom models !\n";
+      print（"Successfully predicted from custom models !\n"）
     
     
     
