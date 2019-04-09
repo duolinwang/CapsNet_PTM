@@ -21,7 +21,7 @@ def main():
     parser.add_argument('-maxneg',  dest='maxneg', type=int, help='maximum iterations for each classifier which controls the maximum copy number of the negative data which has the same size with the positive data. [Default: 30]', required=False, default=30)
     parser.add_argument('-nb_epoch',  dest='nb_epoch', type=int, help='number of epoches for one bootstrap step. It is invalidate, if earlystop is set.', required=False, default=None)
     parser.add_argument('-earlystop',  dest='earlystop', type=int, help='after the \'earlystop\' number of epochs with no improvement the training will be stopped for one bootstrap step. [Default: 20]', required=False, default=20)
-    parser.add_argument('-inputweights',  dest='inputweights', type=int, help='Initial weights saved in a HDF5 file.', required=False, default=None)
+    parser.add_argument('-inputweights',  dest='inputweights', type=str, help='Initial weights saved in a HDF5 file.', required=False, default=None)
     parser.add_argument('-backupweights',  dest='backupweights', type=str, help='Set the intermediate weights for backup in a HDF5 file.', required=False, default=None)
     #parser.add_argument('-transferlayer',  dest='transferlayer', type=int, help='Set the last \'transferlayer\' number of layers to be randomly initialized.', required=False, default=1)
     
@@ -48,10 +48,10 @@ def main():
     try:
        output = open(outputparameter, 'w')
     except IOError:
-       print 'cannot write to ' + outputparameter+ "!\n";
+       print('cannot write to ' + outputparameter+ "!\n")
        exit()
     else:
-       print >> output, "%d\t%d\t%s\tgeneral\t%d\t%s\t%d" % (nclass,window,args.residues,codemode,model,nb_classes)
+       output.write("%d\t%d\t%s\tgeneral\t%d\t%s\t%d" % (nclass,window,args.residues,codemode,model,nb_classes))
     
     from Bootstrapping_capsnet import bootStrapping_allneg_continue_keras2
     from EXtractfragment_sort import extractFragforTraining
