@@ -70,7 +70,7 @@ python predict.py -input test_example_data.fasta -model-prefix example_models -o
 
 ### Citation：
 Please cite the following paper for using this code:
-Duolin Wang, Yanchun Liang, Dong Xu*, Capsule Network for Protein Post-translational Modification Site Prediction.
+Duolin Wang, Yanchun Liang, Dong Xu*, Capsule Network for Protein Post-translational Modification Site Prediction.Bioinformatics,2018.
 
 License
 ----
