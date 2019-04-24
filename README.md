@@ -69,7 +69,7 @@ python predict.py -input [custom predicting data in fasta format] -model-prefix 
 python predict.py -input test_example_data.fasta -model-prefix example_models -output test_example_result
 
 ### Citation：
-Please cite the following paper for using MusiteDeep:
+Please cite the following paper for using this code:
 Duolin Wang, Yanchun Liang, Dong Xu*, Capsule Network for Protein Post-translational Modification Site Prediction.
 
 License
