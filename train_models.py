@@ -1,15 +1,12 @@
 import sys
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="0";
-import tensorflow as tf
-config=tf.ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction=0.8
+#os.environ["CUDA_VISIBLE_DEVICES"]="0";
+#import tensorflow as tf
+#config=tf.ConfigProto()
+#config.gpu_options.per_process_gpu_memory_fraction=0.8
 import pandas as pd
 import numpy as np
 import argparse
-from Bootstrapping_capsnet import bootStrapping_allneg_continue_keras2
-from EXtractfragment_sort import extractFragforTraining
-
 
 def main():
     
@@ -24,9 +21,9 @@ def main():
     parser.add_argument('-maxneg',  dest='maxneg', type=int, help='maximum iterations for each classifier which controls the maximum copy number of the negative data which has the same size with the positive data. [Default: 30]', required=False, default=30)
     parser.add_argument('-nb_epoch',  dest='nb_epoch', type=int, help='number of epoches for one bootstrap step. It is invalidate, if earlystop is set.', required=False, default=None)
     parser.add_argument('-earlystop',  dest='earlystop', type=int, help='after the \'earlystop\' number of epochs with no improvement the training will be stopped for one bootstrap step. [Default: 20]', required=False, default=20)
-    parser.add_argument('-inputweights',  dest='inputweights', type=str, help='Initial weights saved in a HDF5 file.', required=False, default=None)
-    parser.add_argument('-checkpointweights',  dest='checkpointweights', type=str, help='Set the intermediate weights of every checkpoints in HDF5 files.', required=False, default=None)
-    parser.add_argument('-transferlayer',  dest='transferlayer', type=int, help='Set the last \'transferlayer\' number of layers to be randomly initialized.', required=False, default=1)
+    parser.add_argument('-inputweights',  dest='inputweights', type=int, help='Initial weights saved in a HDF5 file.', required=False, default=None)
+    parser.add_argument('-backupweights',  dest='backupweights', type=int, help='Set the intermediate weights for backup in a HDF5 file.', required=False, default=None)
+    #parser.add_argument('-transferlayer',  dest='transferlayer', type=int, help='Set the last \'transferlayer\' number of layers to be randomly initialized.', required=False, default=1)
     
     
     args = parser.parse_args()
@@ -39,45 +36,44 @@ def main():
     np_epoch2=args.nb_epoch;
     earlystop=args.earlystop;
     inputweights=args.inputweights;
-    checkpointweights=args.checkpointweights;
-    transferlayer=args.transferlayer
+    backupweights=args.backupweights;
+    #transferlayer=args.transferlayer
     residues=args.residues.split(",")
+    outputmodel=outputprefix+str("_HDF5model");
+    outputparameter=outputprefix+str("_parameters");
     
-    outputmodel = outputprefix+str("_HDF5model")
-    outputparameter = outputprefix+str("_parameters")
-    
-    codemode=0 #coding method
-    model='nogradientstop' #use this model
+    codemode=42 #coding method
+    model="nogradientstop" #use this model
     nb_classes=2 # binary classification
-    
     try:
        output = open(outputparameter, 'w')
     except IOError:
-       print('cannot write to ' + outputparameter+ "!\n")
+       print('cannot write to ' + outputparameter+ "!\n");
        exit()
     else:
        output.write("%d\t%d\t%s\tgeneral\t%d\t%s\t%d" % (nclass,window,args.residues,codemode,model,nb_classes))
     
-    
+    from Bootstrapping_capsnet import bootStrapping_allneg_continue_keras2
+    from EXtractfragment_sort import extractFragforTraining
     trainfrag=extractFragforTraining(inputfile,window,'-',focus=residues)
     if(valfile is not None):
         valfrag=extractFragforTraining(valfile,window,'-',focus= residues)
     else:
-        valfrag=None
+        valfrag=None;
     
     for bt in range(nclass):
-        checkpointoutput=checkpointweights+"_nclass"+str(bt)
         models=bootStrapping_allneg_continue_keras2(trainfrag.as_matrix(),valfile=valfrag,
-                                                  srate=1,nb_epoch1=1,nb_epoch2=np_epoch2,earlystop=earlystop,maxneg=maxneg,
-                                                  outputweights=checkpointoutput,
-                                                  inputweights=inputweights,
-                                                  model=model,
-                                                  codingMode=codemode,
-                                                  nb_classes=nb_classes
-                                                  )
-        
+                                                 srate=1,nb_epoch1=1,nb_epoch2=np_epoch2,earlystop=earlystop,maxneg=maxneg,
+                                                 outputweights=backupweights,
+                                                 inputweights=inputweights,
+                                                 model=model,
+                                                 codingMode=codemode,
+                                                 nb_classes=nb_classes
+                                                 )
+        #models actually contains models,eval_model,manipulate_model,weight_c_model, and fitHistory 
         models[0].save_weights(outputmodel+'_class'+str(bt),overwrite=True)
-
+        
+        
 if __name__ == "__main__":
     main()         
    
