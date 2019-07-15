@@ -156,7 +156,7 @@ def speard_loss(m):
           return L
     return loss
 
-def Capsnet_main(trainX,trainY,valX=None,valY=None,nb_classes=2,nb_epoch=500,earlystop=None,weights=None,compiletimes=0,compilemodels=None,lr=0.01,lrdecay=1,batch_size=500,lam_recon=0.392,routings=3,modeltype=5,class_weight=None,activefun='linear',power=2,predict=False):
+def Capsnet_main(trainX,trainY,valX=None,valY=None,nb_classes=2,nb_epoch=500,earlystop=None,weights=None,compiletimes=0,compilemodels=None,lr=0.001,lrdecay=1,batch_size=500,lam_recon=0.392,routings=3,modeltype=5,class_weight=None,activefun='linear',power=2,predict=False):
     print(trainX.shape)
     if len(trainX.shape)>3:
           trainX.shape=(trainX.shape[0],trainX.shape[2],trainX.shape[3])
