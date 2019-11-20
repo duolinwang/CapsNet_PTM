@@ -61,7 +61,7 @@ python train_models.py -input train_example_data.fasta -output-prefix example_mo
 
 #### Custom prediction from custom general models and custom kinase-specific models:
 ```sh
-python predict.py -input [custom prediction data in fasta format] -model-prefix [prefix of pre-trained model] -output [custom specified file for predicting results] 
+python predict.py -input [custom prediction data in fasta format] -model-prefix [prefix of pre-trained model] -output [custom specified prefix for the prediction results] 
 ```
 
 ####Example
